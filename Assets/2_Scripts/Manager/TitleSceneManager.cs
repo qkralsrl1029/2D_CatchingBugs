@@ -24,13 +24,11 @@ public class TitleSceneManager : MonoBehaviour      //타이틀 화면 관리 �
     // Update is called once per frame
     void Update()
     {
-        
         timeCheck += Time.deltaTime;
-        
         if (timeCheck > 4)  //4초마다 색 변화
         {
             timeCheck = 0;
-            //2.5초동안 변화 1.5초 대기
+            //2.5초동안 변화 1.5초 유지
             txtTitle.CrossFadeColor(colors[(colorIndex++)%colors.Length], 2.5f, true, false);
         }      
     }

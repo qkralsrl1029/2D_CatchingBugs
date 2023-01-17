@@ -28,22 +28,21 @@ public class generatorController : MonoBehaviour        //벌레 생성
         float screenH = Camera.main.orthographicSize;
         float screenW = screenH * Camera.main.aspect; //종횡비 곱해서 세로값 맞추기
         float angle = 0;        //생성시 방향
+        int genPos = 8;
         Vector3 pos = Vector3.zero;//생성시 위치
         
-       
-
         List<int> uniqueBugAppearPos = new List<int>();
         //중복되지않게 빠른 벌레 생성 위치 랜덤하게 뽑기
         for (int i = 0; i < uniqueBugCount; i++)
         {
-            int temp = Random.Range(0, 8);
+            int temp = Random.Range(0, genPos);
             while(uniqueBugAppearPos.Contains(temp))
-                temp = Random.Range(0, 8);
+                temp = Random.Range(0, genPos);
             uniqueBugAppearPos.Add(temp);
         }
               
-
-        for (int i = 0; i < 8; i++)
+        //벌레의 위치와 각도를 설정하고 생성
+        for (int i = 0; i < genPos; i++)
         {
             //해당 위치에 맞는 벌레 대입
             for (int j = 0; j < uniqueBugAppearPos.Count; j++)
@@ -86,8 +85,5 @@ public class generatorController : MonoBehaviour        //벌레 생성
                 go.transform.Rotate(0, 0, angle);
             }
         }
-
-       
-
     }
 }

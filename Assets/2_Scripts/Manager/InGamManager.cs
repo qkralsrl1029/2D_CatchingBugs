@@ -127,7 +127,6 @@ public class InGamManager : MonoBehaviour
         ActivateTitle();            //상태바 제거
         checkTime = 0;
         _wormGC.startSpawn(1,4);    //벌레 생성 시작
-
     }
     public void TimeoverGame()
     {
@@ -142,9 +141,8 @@ public class InGamManager : MonoBehaviour
         //생성된 벌레들 제거
         BugControl[] bugs = GameObject.FindObjectsOfType<BugControl>();
         for (int i = 0; i < bugs.Length; i++)
-        {
             Destroy(bugs[i].gameObject);
-        }
+        
 
         //현재점수가 최고점수보다 높을경우 DB에 최신화
         if (UIScript.instance.getScore() > theData.getScore(stageLevel))
@@ -155,41 +153,15 @@ public class InGamManager : MonoBehaviour
     }
 
     //스테이지 선택
-    public void stageEASY()
+    public void stageSelect(int level)
     {
-        stageLevel = 0;
-
         SoundManager.instance.PlaySFX(SoundManager.eEffectType.BUTTON);
         isStageSelected = true;
-        mapObj.GetComponent<SpriteRenderer>().sprite = tileMap[0];  //맵 배경 교체
-        generatorController.uniqueBugCount = 2;                     //벌레 생성패턴 교체
-        Stages.SetActive(false);
-        
-    }
-
-    public void stageNORMAL()
-    {
-        stageLevel = 1;
-
-        SoundManager.instance.PlaySFX(SoundManager.eEffectType.BUTTON);
-        isStageSelected = true;
-        mapObj.GetComponent<SpriteRenderer>().sprite = tileMap[1];
-        generatorController.uniqueBugCount = 5;
+        mapObj.GetComponent<SpriteRenderer>().sprite = tileMap[level];  //맵 배경 교체
+        generatorController.uniqueBugCount = (level+1)*2;                     //벌레 생성패턴 교체
         Stages.SetActive(false);
     }
 
-    public void stageHARD()
-    {
-        stageLevel = 2;
-
-        SoundManager.instance.PlaySFX(SoundManager.eEffectType.BUTTON);
-        isStageSelected = true;
-        mapObj.GetComponent<SpriteRenderer>().sprite = tileMap[2];
-        generatorController.uniqueBugCount = 8;
-        Stages.SetActive(false);
-    }
-
-    //
 
     public void ResultGame()
     {

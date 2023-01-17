@@ -13,6 +13,8 @@ public class TitleScreecScript : MonoBehaviour
 
     [SerializeField] Image circleImage;
     float tempScale = 0.8f;
+    float w = 1.2f;
+    float defaultR = 0.5f;
  
 
     // Update is called once per frame
@@ -25,9 +27,9 @@ public class TitleScreecScript : MonoBehaviour
     
     void setRad()
     {
-        tempScale = 0.8f + (1.2f * radiusSlider.value);
+        tempScale += (w * radiusSlider.value);
         circleImage.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
-        TouchRange.SetRadius(0.5f + 2*radiusSlider.value);
+        TouchRange.SetRadius(defaultR + 2*radiusSlider.value);
     }
 
     void setVol()

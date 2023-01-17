@@ -33,10 +33,10 @@ public class TouchRange : MonoBehaviour
 
                 Vector3 targetPos = new Vector3(mousePos.x, mousePos.y, 0); 
 
-                var _effect = Instantiate(touchEffect, targetPos, Quaternion.identity); //손 모양 이펙트
+                // 타격 이펙트
+                var _effect = Instantiate(touchEffect, targetPos, Quaternion.identity); 
                 _effect.transform.localScale = new Vector3(touchRange, touchRange, 0);
                 Destroy(_effect, 0.5f);
-
 
                 //벌레 레이어마스크만 검출, 범위 내 벌레들 배열에 저장
                 Collider2D[] _target = Physics2D.OverlapCircleAll(targetPos,touchRange,targetMask );
@@ -44,10 +44,7 @@ public class TouchRange : MonoBehaviour
                 {
                     GameObject temp = _target[i].gameObject;
                     if(temp.transform.tag=="bug")
-                    {
-                        Debug.Log("bug observed");
                         temp.GetComponent<BugControl>().getTouched();   //해당 벌레의 피격 함수 실행
-                    }
                 }
             }
         }
